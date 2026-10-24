@@ -132,7 +132,7 @@ Visitors can send a message from the Contact page. Each message is saved as a ne
 
 ## Sharing preview (WhatsApp, Facebook) and icon
 
-Every page has a title, description, icon and a preview picture (`images/share.jpg`, 1200x630). These tags need the real web address. Once you know it, in VS Code press Ctrl+Shift+H, find `https://HUL2024.github.io/ajb-site`, replace it with your address (for example `https://yourname.github.io/ajb-site`, no slash at the end) and click Replace All. To change the preview picture, replace `images/share.jpg` (keep the name and size). After changing it, test the link in the Facebook Sharing Debugger, because WhatsApp and Facebook remember old previews.
+Every page has a title, description, icon and a preview picture (`images/share.jpg`, 1200x630). These tags need the real web address. Once you know it, in VS Code press Ctrl+Shift+H, find `https://hul2024.github.io/ajb-site`, replace it with your address (for example `https://yourname.github.io/ajb-site`, no slash at the end) and click Replace All. To change the preview picture, replace `images/share.jpg` (keep the name and size). After changing it, test the link in the Facebook Sharing Debugger, because WhatsApp and Facebook remember old previews.
 
 ## Speed
 
