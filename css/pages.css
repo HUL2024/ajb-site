@@ -160,3 +160,14 @@ footer a:hover{color:var(--gold)}
 .mv-card.mission{background:linear-gradient(120deg,#1b56ad,#2a72cc)}
 @media (prefers-color-scheme:dark){.motto p{color:#fff}}
 .motto .est{display:inline-block;margin-top:10px;padding:3px 14px;border-radius:999px;background:var(--gold);color:var(--navy);font-weight:700;font-size:13px;letter-spacing:.04em}
+
+/* Share buttons */
+.share{margin:26px 0 8px}
+.share-label{display:block;margin-bottom:8px;color:var(--navy)}
+.share-bar{display:flex;flex-wrap:wrap;gap:8px}
+.share-btn{font:inherit;font-size:13px;font-weight:700;color:#fff;background:var(--navy);border:0;border-radius:999px;padding:8px 14px;cursor:pointer}
+.share-whatsapp{background:#1fa855}.share-facebook{background:#1877f2}.share-linkedin{background:#0a66c2}.share-copy{background:#4a5b78}
+.share-native{background:var(--gold);color:var(--navy)}
+footer .share-bar{gap:6px}
+footer .share-btn{padding:6px 12px;font-size:12px}
+@media (prefers-color-scheme:dark){.share-label{color:#fff}}

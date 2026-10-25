@@ -57,7 +57,8 @@ function renderStory(list) {
   box.append(
     el("h2", { textContent: n.title }),
     el("p", { className: "date", textContent: n.date }),
-    el("p", { className: "body", textContent: n.summary || "" })
+    el("p", { className: "body", textContent: n.summary || "" }),
+    shareSection("Share this story")
   );
 }
 
@@ -221,6 +222,53 @@ function renderDocuments(list) {
     box.hidden = false;
   });
 }
+
+/* ---------- Share buttons ---------- */
+// Any element with data-share="Label" gets a row of share buttons for the page it is on (the footer has one on every page).
+// The story page adds its own row under each story. On phones the "Share" button opens the phone's own share sheet.
+function currentShare() {
+  return { url: location.href.split("#")[0], title: document.title || "AJB Leaders Academy" };
+}
+
+function shareBar() {
+  const bar = el("div", { className: "share-bar" });
+  const add = (cls, label, onClick) => {
+    const b = el("button", { type: "button", className: "share-btn " + cls, textContent: label });
+    b.addEventListener("click", () => onClick(b));
+    bar.append(b);
+  };
+  if (navigator.share) add("share-native", "Share", () => navigator.share(currentShare()).catch(() => {}));
+  const open = href => window.open(href, "_blank", "noopener");
+  add("share-whatsapp", "WhatsApp", () => { const i = currentShare(); open("https://wa.me/?text=" + encodeURIComponent(i.title + " " + i.url)); });
+  add("share-facebook", "Facebook", () => open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(currentShare().url)));
+  add("share-linkedin", "LinkedIn", () => open("https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(currentShare().url)));
+  add("share-copy", "Copy link", btn => {
+    const text = currentShare().url;
+    const done = () => { btn.textContent = "Link copied ✓"; setTimeout(() => { btn.textContent = "Copy link"; }, 1800); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, () => window.prompt("Copy this link:", text));
+    else window.prompt("Copy this link:", text);
+  });
+  return bar;
+}
+
+function shareSection(label) {
+  const box = el("div", { className: "share" });
+  if (label) box.append(el("b", { className: "share-label", textContent: label }));
+  box.append(shareBar());
+  return box;
+}
+
+function initShare() {
+  document.querySelectorAll("[data-share]").forEach(box => {
+    if (box.dataset.ready) return;
+    box.dataset.ready = "1";
+    if (box.dataset.share) box.append(el("b", { className: "share-label", textContent: box.dataset.share }));
+    box.append(shareBar());
+  });
+}
+initShare();
+const footerBox = document.getElementById("site-footer");
+if (footerBox) new MutationObserver(initShare).observe(footerBox, { childList: true }); // the footer loads a moment after the page
 
 /* ---------- Speed: remember the data and warm up photos in the background ---------- */
 const CACHE_KEY = "ajb-site-data-v1:" + (typeof API_URL !== "undefined" ? API_URL : "");
