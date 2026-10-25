@@ -171,3 +171,6 @@ footer a:hover{color:var(--gold)}
 footer .share-bar{gap:6px}
 footer .share-btn{padding:6px 12px;font-size:12px}
 @media (prefers-color-scheme:dark){.share-label{color:#fff}}
+
+/* Staff bios keep the line breaks typed in the Sheet, and are easier to read left-aligned */
+.staff-card p{white-space:pre-line;text-align:left}
